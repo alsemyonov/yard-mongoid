@@ -15,6 +15,7 @@ module YARD
           o.visibility = :public
           o.source = statement.source
           o.signature = "def #{name}"
+          o.docstring = "Returns the value of attribute #{name}"
         end
       end
 
@@ -29,6 +30,7 @@ module YARD
           o.source = statement.source
           o.signature = "def #{name}=(value)"
           o.parameters = [['value', nil]]
+          o.docstring = "Sets the attribute #{name}\n@param value the value to set the attribute #{name} to."
         end
       end
 
