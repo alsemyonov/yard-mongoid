@@ -6,3 +6,4 @@ module YARD
 end
 
 require 'yard/mongoid/field_handler'
+require 'yard/mongoid/legacy/field_handler'
