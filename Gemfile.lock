@@ -1,0 +1,16 @@
+PATH
+  remote: .
+  specs:
+    yard-mongoid (0.0.1)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    yard (0.6.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  yard (~> 0.6.1)
+  yard-mongoid!
