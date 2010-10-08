@@ -1,16 +1,16 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "yard-mongoid/version"
+require "yard/mongoid/version"
 
 Gem::Specification.new do |s|
   s.name        = "yard-mongoid"
   s.version     = Yard::Mongoid::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["Alexander Semyonov"]
+  s.email       = ["al@semyonov.us"]
   s.homepage    = "http://rubygems.org/gems/yard-mongoid"
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{A Yard plugin for parsing Mongoid model syntax.}
+  s.description = %q{Once yard-mongoid is installed, YARD will automatically load the plugin when ever the `yard doc` utility is ran on a project.}
 
   s.rubyforge_project = "yard-mongoid"
 
