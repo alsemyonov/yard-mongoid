@@ -16,6 +16,5 @@ module YARD
         return namespace
       end
     end
-
   end
 end
