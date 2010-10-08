@@ -1,8 +1,8 @@
 module YARD
   module Mongoid
-    autoload :VERSION, 'lib/mongoid/version'
-    autoload :Extensions, 'lib/mongoid/extensions'
+    autoload :VERSION, 'yard/mongoid/version'
+    autoload :Extensions, 'yard/mongoid/extensions'
   end
 end
 
-require 'lib/mongoid/field_handler'
+require 'yard/mongoid/field_handler'
