@@ -1,6 +1,6 @@
 module YARD
   module Mongoid
-    class FieldHandler < YARD::Handlers::Ruby::Base
+    class FieldHandler < YARD::Handlers::Ruby::AttributeHandler
       include Extensions
       include Helpers
 
@@ -14,13 +14,14 @@ module YARD
         if name.type == :symbol
           name = name.source[1..-1]
 
-          register_field_getter(nobj, name, mscope)
+          #register_field_getter(nobj, name, mscope)
           register_field_setter(nobj, name, mscope)
           register_field_presence(nobj, name, mscope)
           register_field_change(nobj, name, mscope)
           register_field_changed(nobj, name, mscope)
           register_field_was(nobj, name, mscope)
           register_field_reset(nobj, name, mscope)
+          super
         end
       end
     end
