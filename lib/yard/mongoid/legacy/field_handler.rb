@@ -1,18 +1,15 @@
 module YARD
   module Mongoid
-    class FieldHandler < YARD::Handlers::Ruby::AttributeHandler
-      include Extensions
-      include Helpers
+    module Legacy
+      class FieldHandler < YARD::Handlers::Ruby::Legacy::AttributeHandler
+        include Helpers
 
-      handles method_call(:field)
+        handles /\Afield\s+:/
 
-      def process
-        nobj = effected_namespace
-        mscope = scope
-        name = statement.parameters[0].last
-
-        if name.type == :symbol
-          name = name.source[1..-1]
+        def process
+          nobj = namespace
+          mscope = scope
+          name = statement.tokens[2,1].to_s[1..-1]
 
           #register_field_getter(nobj, name, mscope)
           register_field_setter(nobj, name, mscope)
