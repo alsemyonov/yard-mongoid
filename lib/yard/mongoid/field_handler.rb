@@ -10,21 +10,19 @@ module YARD
       handles method_call(:field)
 
       def process
-        nobj       = effected_namespace
-        mscope     = scope
         name       = statement.parameters[0].last
 
         if name.type == :symbol
           name = name.source[1..-1]
 
-          register_field_getter(nobj, name, mscope, class_name, defvalue)
-          #register_field_setter(nobj, name, mscope)
-          #register_field_presence(nobj, name, mscope)
-          #register_field_change(nobj, name, mscope)
-          #register_field_changed(nobj, name, mscope)
-          #register_field_was(nobj, name, mscope)
-          #register_field_reset(nobj, name, mscope)
-          #super
+          register_field_getter(effected_namespace, name, scope, class_name, default_value)
+          register_field_setter(effected_namespace, name, scope)
+          register_field_presence(effected_namespace, name, scope)
+          register_field_change(effected_namespace, name, scope)
+          register_field_changed(effected_namespace, name, scope)
+          register_field_was(effected_namespace, name, scope)
+          register_field_reset(effected_namespace, name, scope)
+          super
         end
       end
 
@@ -34,8 +32,8 @@ module YARD
         return @class_name if instance_variable_defined?(:@class_name)
 
         if statement.parameters.size > 2
-          statement.parameters[1].source.split(/,\s*/).each do |keyvalue|
-            if keyvalue =~ hash_args[:type]
+          statement.parameters[1].source.split(/,\s*/).each do |key_and_value|
+            if key_and_value =~ hash_args[:type]
               @class_name = $2
               break
             end
@@ -44,18 +42,18 @@ module YARD
         @class_name ||= 'String'
       end
 
-      def defvalue
-        return @defvalue if instance_variable_defined?(:@defvalue)
+      def default_value
+        return @default_value if instance_variable_defined?(:@default_value)
 
         if statement.parameters.size > 2
-          statement.parameters[1].source.split(/,\s*/).each do |keyvalue|
-            if keyvalue =~ /(:default\s*=>|default:)\s*(.+)\s*$/
-              @defvalue = $2
+          statement.parameters[1].source.split(/,\s*/).each do |key_and_value|
+            if key_and_value =~ /(:default\s*=>|default:)\s*(.+)\s*$/
+              @default_value = $2
               break
             end
           end
         end
-        @defvalue ||= nil
+        @default_value ||= nil
       end
 
       protected

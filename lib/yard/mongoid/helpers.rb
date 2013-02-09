@@ -10,7 +10,7 @@ module YARD
       # @param [NamespaceObject] namespace the namespace
       # @param [String, Symbol] name the method name
       # @param [Symbol] scope +:instance+ or +:class+
-      def register_field_getter(namespace, name, scope = :instance, type = 'Object', defvalue = nil)
+      def register_field_getter(namespace, name, scope = :instance, type = 'Object', default_value = nil)
         register_new_method_object(namespace, name, scope) do |o|
           o.group = MONGOID_FIELDS
           o.visibility = :public
@@ -19,7 +19,7 @@ module YARD
         end.tap do |o|
           docstring = o.docstring.empty? ? "Field #{name}" : o.docstring
           docstring += "\n@return [#{type}] "
-          docstring += "(defaults to: +#{defvalue}+) " if defvalue
+          docstring += "(defaults to: +#{default_value}+) " if default_value
           o.docstring = docstring
         end
       end
