@@ -1,8 +1,6 @@
 module YARD
   module Mongoid
     autoload :VERSION,    'yard/mongoid/version'
-    autoload :Extensions, 'yard/mongoid/extensions'
-    autoload :Helpers,    'yard/mongoid/helpers'
   end
 end
 

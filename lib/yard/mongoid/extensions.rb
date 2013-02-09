@@ -13,7 +13,7 @@ module YARD
           end
         end
 
-        return namespace
+        namespace
       end
     end
   end

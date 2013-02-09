@@ -1,3 +1,6 @@
+require 'yard/mongoid/extensions'
+require 'yard/mongoid/helpers'
+
 module YARD
   module Mongoid
     class FieldHandler < YARD::Handlers::Ruby::AttributeHandler
