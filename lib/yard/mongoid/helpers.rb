@@ -10,12 +10,17 @@ module YARD
       # @param [NamespaceObject] namespace the namespace
       # @param [String, Symbol] name the method name
       # @param [Symbol] scope +:instance+ or +:class+
-      def register_field_getter(namespace, name, scope = :instance)
+      def register_field_getter(namespace, name, scope = :instance, type = 'Object', defvalue = nil)
         register_new_method_object(namespace, name, scope) do |o|
+          o.group = MONGOID_FIELDS
           o.visibility = :public
           o.source = statement.source
           o.signature = "def #{name}"
-          o.docstring = "Returns the value of attribute #{name}"
+        end.tap do |o|
+          docstring = o.docstring.empty? ? "Field #{name}" : o.docstring
+          docstring += "\n@return [#{type}] "
+          docstring += "(defaults to: +#{defvalue}+) " if defvalue
+          o.docstring = docstring
         end
       end
 
@@ -26,6 +31,7 @@ module YARD
       # @param [Symbol] scope +:instance+ or +:class+
       def register_field_setter(namespace, name, scope = :instance)
         register_new_method_object(namespace, "#{name}=", scope) do |o|
+          o.group = MONGOID_FIELDS
           o.visibility = :public
           o.source = statement.source
           o.signature = "def #{name}=(value)"
@@ -41,6 +47,7 @@ module YARD
       # @param [Symbol] scope +:instance+ or +:class+
       def register_field_presence(namespace, name, scope = :instance)
         register_new_method_object(namespace, "#{name}?", scope) do |o|
+          o.group = MONGOID_FIELDS
           o.visibility = :public
           o.source = statement.source
           o.signature = "def #{name}?"
@@ -54,6 +61,7 @@ module YARD
       # @param [Symbol] scope +:instance+ or +:class+
       def register_field_change(namespace, name, scope = :instance)
         register_new_method_object(namespace, "#{name}_change", scope) do |o|
+          o.group = MONGOID_FIELDS
           o.visibility = :public
           o.source = statement.source
           o.signature = "def #{name}_change"
@@ -67,6 +75,7 @@ module YARD
       # @param [Symbol] scope +:instance+ or +:class+
       def register_field_changed(namespace, name, scope = :instance)
         register_new_method_object(namespace, "#{name}_changed?", scope) do |o|
+          o.group = MONGOID_FIELDS
           o.visibility = :public
           o.source = statement.source
           o.signature = "def #{name}_changed?"
@@ -80,6 +89,7 @@ module YARD
       # @param [Symbol] scope +:instance+ or +:class+
       def register_field_was(namespace, name, scope = :instance)
         register_new_method_object(namespace, "#{name}_was", scope) do |o|
+          o.group = MONGOID_FIELDS
           o.visibility = :public
           o.source = statement.source
           o.signature = "def #{name}_was"
@@ -93,6 +103,7 @@ module YARD
       # @param [Symbol] scope +:instance+ or +:class+
       def register_field_reset(namespace, name, scope = :instance)
         register_new_method_object(namespace, "reset_#{name}!", scope) do |o|
+          o.group = MONGOID_FIELDS
           o.visibility = :public
           o.source = statement.source
           o.signature = "def reset_#{name}!"

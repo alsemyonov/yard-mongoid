@@ -1,6 +1,7 @@
 require 'yard/mongoid/version'
 module YARD
   module Mongoid
+    MONGOID_FIELDS = 'Mongoid Fields'
   end
 end
 
