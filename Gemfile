@@ -3,4 +3,7 @@ source 'http://rubygems.org'
 # Specify your gem's dependencies in yard-mongoid.gemspec
 gemspec
 
-gem 'yard', '~> 0.8.4'
+group :development do
+  gem 'rake'
+  gem 'mongoid', '~> 3.0'
+end

@@ -1,6 +1,6 @@
+require 'yard/mongoid/version'
 module YARD
   module Mongoid
-    autoload :VERSION,    'yard/mongoid/version'
   end
 end
 
