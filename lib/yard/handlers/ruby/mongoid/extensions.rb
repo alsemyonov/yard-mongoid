@@ -1,4 +1,4 @@
-module YARD
+module YARD::Handlers::Ruby
   module Mongoid
     module Extensions
     protected
