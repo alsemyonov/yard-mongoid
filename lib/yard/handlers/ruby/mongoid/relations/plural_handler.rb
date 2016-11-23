@@ -7,6 +7,7 @@ module YARD::Handlers::Ruby::Mongoid::Relations
     end
 
     private
+
     def return_description
       "An array of associated #{method_name.humanize}"
     end

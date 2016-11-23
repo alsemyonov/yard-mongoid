@@ -9,6 +9,7 @@ module YARD::Handlers::Ruby::Mongoid::Relations
     end
 
     private
+
     def return_description
       ''
     end

@@ -8,7 +8,7 @@ module YARD::Handlers::Ruby
       include Extensions
       include YARD::Handlers::Ruby::Mongoid::Helpers
 
-      MONGOID_FIELDS = 'Fields'
+      MONGOID_FIELDS = 'Fields'.freeze
 
       namespace_only
 
@@ -22,11 +22,11 @@ module YARD::Handlers::Ruby
 
           add_field_getter(effected_namespace, name, class_name, default_value)
           add_field_setter(effected_namespace, name, class_name)
-          #register_field_presence(effected_namespace, name, scope)
-          #register_field_change(effected_namespace, name, scope)
-          #register_field_changed(effected_namespace, name, scope)
-          #register_field_was(effected_namespace, name, scope)
-          #register_field_reset(effected_namespace, name, scope)
+          # register_field_presence(effected_namespace, name, scope)
+          # register_field_change(effected_namespace, name, scope)
+          # register_field_changed(effected_namespace, name, scope)
+          # register_field_was(effected_namespace, name, scope)
+          # register_field_reset(effected_namespace, name, scope)
         end
       end
 
@@ -38,7 +38,7 @@ module YARD::Handlers::Ruby
         if statement.parameters.size > 2
           statement.parameters[1].source.split(/,\s*/).each do |key_and_value|
             if key_and_value =~ hash_args[:type]
-              @class_name = $2
+              @class_name = Regexp.last_match(2)
               break
             end
           end
@@ -53,7 +53,7 @@ module YARD::Handlers::Ruby
         if statement.parameters.size > 2
           statement.parameters[1].source.split(/,\s*/).each do |key_and_value|
             if key_and_value =~ /(:default\s*=>|default:)\s*(.+)\s*$/
-              @default_value = $2
+              @default_value = Regexp.last_match(2)
               break
             end
           end
@@ -70,7 +70,7 @@ module YARD::Handlers::Ruby
       end
 
       # @yieldparam [YARD::CodeObjects::MethodObject]
-      def add_field_method(namespace, name, &block)
+      def add_field_method(namespace, name)
         register YARD::CodeObjects::MethodObject.new(namespace, name, :instance) do |mo|
           mo.group = MONGOID_FIELDS
           mo.visibility ||= :public
@@ -78,7 +78,7 @@ module YARD::Handlers::Ruby
           mo.dynamic = true
           mo.signature = "def #{name}"
           mo.docstring = '' if mo.docstring.empty?
-          block.call(mo) if block_given?
+          yield(mo) if block_given?
         end
       end
 

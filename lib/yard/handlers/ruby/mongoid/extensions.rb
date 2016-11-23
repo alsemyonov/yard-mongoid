@@ -1,7 +1,8 @@
 module YARD::Handlers::Ruby
   module Mongoid
     module Extensions
-    protected
+      protected
+
       def effected_namespace
         if statement.type == :command_call
           context = statement.jump(:var_ref)

@@ -15,7 +15,7 @@ module YARD::Handlers::Ruby::Mongoid
         object.group     = group_name
         object.docstring = return_description
         object.docstring.add_tag get_tag(:return, '', class_name)
-        object.docstring.add_tag get_tag(:see, "http://mongoid.org/en/mongoid/docs/relations.html##{statement.method_name(true).to_s}")
+        object.docstring.add_tag get_tag(:see, "http://mongoid.org/en/mongoid/docs/relations.html##{statement.method_name(true)}")
         object.dynamic = true
         register object
       end
@@ -25,6 +25,7 @@ module YARD::Handlers::Ruby::Mongoid
       end
 
       private
+
       def method_name
         call_params[0]
       end
@@ -36,7 +37,7 @@ module YARD::Handlers::Ruby::Mongoid
           while i < param_size - 1
             # May want to evaluate doing it this way
             statement.parameters[i].jump(:hash).source =~ /(:class_name\s*=>|class_name:)\s*["']([^"']+)["']/
-            return $2 if $2
+            return Regexp.last_match(2) if Regexp.last_match(2)
             i += 1
           end
         end
