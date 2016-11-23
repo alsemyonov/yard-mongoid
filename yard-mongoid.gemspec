@@ -19,5 +19,5 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = %w(lib)
 
-  s.add_dependency 'yard', '~> 0.8.4'
+  s.add_dependency 'yard', '>= 0.8.4'
 end
